@@ -52,7 +52,7 @@ class SampleEvent(object):
     def load_event(service_name):
         """ Loads a sample JSON event for the specified service """
         SampleEvent.validate_service_name(service_name)
-        filename = 'json_samples/' + service_name + '.json'
+        filename = f'json_samples/{service_name}.json'
         data_file = open(pkg_resources.resource_filename(
             "aws_lambda_sample_events", filename))
         return json.load(data_file)
@@ -60,5 +60,5 @@ class SampleEvent(object):
     @staticmethod
     def validate_service_name(service_name):
         """ Validates the specified service name is supported """
-        if not service_name in SERVICES:
-            raise UnknownServiceError('Valid Services are: ' + str(SERVICES))
+        if service_name not in SERVICES:
+            raise UnknownServiceError(f'Valid Services are: {str(SERVICES)}')
